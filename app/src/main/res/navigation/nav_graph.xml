@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.lalee.capstoneproject.HomeFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_HomeFragment_to_CameraFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/CameraFragment"
         android:name="com.lalee.capstoneproject.CameraFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/camera_fragment_label"
         tools:layout="@layout/fragment_camera">
         <action
             android:id="@+id/action_CameraFragment_to_HomeFragment"
