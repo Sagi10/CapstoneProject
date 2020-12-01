@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iv_result_small_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/example_result_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_result_small_logo"
+            app:layout_constraintTop_toTopOf="@+id/iv_result_small_logo" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/example_recycable_plactic"
+            app:layout_constraintStart_toStartOf="@+id/tv_result_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_result_title" />
+
+        <ImageView
+            android:id="@+id/iv_result_logo"
+            android:layout_width="380dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_result_small_logo"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_result_extrainfo"
+            android:layout_width="380dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/example_extrainfo"
+            app:layout_constraintEnd_toEndOf="@+id/iv_result_logo"
+            app:layout_constraintStart_toStartOf="@+id/iv_result_logo"
+            app:layout_constraintTop_toBottomOf="@+id/iv_result_logo" />
+
+        <Button
+            android:id="@+id/btn_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_send_feedback"
+            app:layout_constraintStart_toStartOf="@+id/tv_result_extrainfo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_result_extrainfo" />
+
+        <Button
+            android:id="@+id/btn_moreinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_more_info"
+            app:layout_constraintEnd_toEndOf="@+id/tv_result_extrainfo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_result_extrainfo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

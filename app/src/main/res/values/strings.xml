@@ -7,4 +7,9 @@
 
     <string name="title_home">Welcome to Trashy</string>
     <string name="description_home">Take a photo to see how to expose the trash you found!</string>
+    <string name="example_extrainfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</string>
+    <string name="btn_more_info">More info</string>
+    <string name="btn_send_feedback">Send feedback</string>
+    <string name="example_recycable_plactic">recycable plactic</string>
+    <string name="example_result_title">Plastic bottle</string>
 </resources>
