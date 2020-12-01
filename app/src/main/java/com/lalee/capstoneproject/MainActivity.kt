@@ -1,4 +1,4 @@
-package com.lalee.capstoneproject.ui
+package com.lalee.capstoneproject
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.lalee.capstoneproject.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
