@@ -1,4 +1,4 @@
-package com.lalee.capstoneproject
+package com.lalee.capstoneproject.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
