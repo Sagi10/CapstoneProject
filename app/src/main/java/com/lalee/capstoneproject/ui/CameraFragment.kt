@@ -45,33 +45,57 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //openDefaultCamera()
         dispatchTakePictureIntent()
     }
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun dispatchTakePictureIntent() {
-        val pictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-        if (pictureIntent.resolveActivity(requireActivity().packageManager) != null) {
-            var photoFile: File? = null
-
-            try {
-                photoFile = createImageFile()
-            } catch (ex: IOException) {
-                //error
-            }
-
-            if (photoFile != null) {
-                val photoURI = FileProvider.getUriForFile(
-                    requireContext(),
-                    "com.lalee.capstoneproject.fileprovider",
-                    photoFile
-                )
-                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    // Error occurred while creating the File
+                    null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        requireContext(),
+                        "com.lalee.capstoneproject.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
             }
         }
+
+        // this is the old java style
+
+//        val pictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//
+//        if (pictureIntent.resolveActivity(requireActivity().packageManager) != null) {
+//            var photoFile: File? = null
+//
+//            try {
+//                photoFile = createImageFile()
+//            } catch (ex: IOException) {
+//                //error
+//            }
+//
+//            if (photoFile != null) {
+//                val photoURI = FileProvider.getUriForFile(
+//                    requireContext(),
+//                    "com.lalee.capstoneproject.fileprovider",
+//                    photoFile
+//                )
+//                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
+//            }
+//        }
 
     }
 
@@ -81,14 +105,28 @@ class CameraFragment : Fragment() {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val image = File.createTempFile(
-            "JPEG_${timeStamp}_",
-            ".jpg",
-            storageDir
-        ) // directory)
-        currentPhotoPath = image.absolutePath
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
 
-        return image
+    // this is the old java style
+
+//        // Create an image file name
+//        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+//        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+//        val image = File.createTempFile(
+//            "JPEG_${timeStamp}_",
+//            ".jpg",
+//            storageDir
+//        ) // directory)
+//        currentPhotoPath = image.absolutePath
+//
+//        return image
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -96,27 +134,10 @@ class CameraFragment : Fragment() {
 
             val file = File(currentPhotoPath)
             Log.i(TAG, "FILE: ${file.absolutePath}")
-            Log.i(TAG, "DATA: ${data?.data}")
-
 
             imageView.setImageURI(Uri.fromFile(file))
-
-
-            //val imageBitmap = data?.extras?.get("data") as Bitmap
-            //imageView.setImageBitmap(imageBitmap)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-
-//    private fun openDefaultCamera() {
-//        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//
-//        try {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//
-//        } catch (e: ActivityNotFoundException) {
-//            Toast.makeText(activity, "ERROR: ${e.message}", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
 }
