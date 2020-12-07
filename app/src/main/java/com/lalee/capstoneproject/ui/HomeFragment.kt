@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.lalee.capstoneproject.R
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class HomeFragment : Fragment() {
 
     override fun onCreateView(

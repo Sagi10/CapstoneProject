@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.lalee.capstoneproject.MainActivity">
 
-<!--    <item-->
-<!--        android:id="@+id/action_settings"-->
-<!--        android:orderInCategory="100"-->
-<!--        android:title="@string/action_settings"-->
-<!--        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_history"
+        android:orderInCategory="100"
+        android:title="@string/history"
+        app:showAsAction="never" />
 </menu>

@@ -11,11 +11,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.findNavController
 import com.lalee.capstoneproject.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-
-private const val REQUEST_IMAGE_CAPTURE = 1
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,27 +24,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         fab_camera_home.setOnClickListener {
-            openDefaultCamera()
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_HomeFragment_to_CameraFragment)
         }
-    }
-
-    private fun openDefaultCamera() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-            
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "ERROR: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            iv_home_logo.setImageBitmap(imageBitmap)
-        }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

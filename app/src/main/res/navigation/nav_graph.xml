@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_CameraFragment"
             app:destination="@id/CameraFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/CameraFragment"
