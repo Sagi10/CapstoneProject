@@ -17,18 +17,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.fragment.app.viewModels
+import com.google.gson.Gson
 import com.lalee.capstoneproject.R
+import com.lalee.capstoneproject.model.JsonURL
+import com.lalee.capstoneproject.viewmodel.TrashResultViewModel
 import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.logging.Level.INFO
 
 private const val REQUEST_IMAGE_CAPTURE = 1
 lateinit var currentPhotoPath: String
 
 class CameraFragment : Fragment() {
+
+    private val customVisionViewModel: TrashResultViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,6 +143,17 @@ class CameraFragment : Fragment() {
             Log.i(TAG, "FILE: ${file.absolutePath}")
 
             imageView.setImageURI(Uri.fromFile(file))
+
+            val jj = JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/IMG_8757.jpg?alt=media&token=a96bdf63-542c-4789-96f8-61381d5f6e22")
+            val jsonImage: String = Gson().toJson(jj)
+            //Toast.makeText(activity, jsonImage, Toast.LENGTH_LONG).show()
+            Log.i(TAG, jsonImage)
+
+            customVisionViewModel.getPredictionFromURL(jj)
+            //customVisionViewModel.getPredictionFromFILE(file.absoluteFile)
+            customVisionViewModel.customVisionResult.observe(viewLifecycleOwner, {
+                Toast.makeText(activity, it.id, Toast.LENGTH_SHORT).show()
+            })
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
