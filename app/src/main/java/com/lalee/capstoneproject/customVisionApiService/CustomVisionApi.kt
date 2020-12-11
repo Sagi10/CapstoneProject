@@ -1,5 +1,6 @@
 package com.lalee.capstoneproject.customVisionApiService
 
+import com.lalee.capstoneproject.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -13,8 +14,7 @@ class CustomVisionApi {
     companion object {
         private const val BASE_URL = "https://westeurope.api.cognitive.microsoft.com/"
 
-        //TODO make this private before adding to git.
-        private const val API_KEY = "b4b90df0975a4b43ac592d431be8e464"
+        private const val API_KEY = BuildConfig.CUSTOMVISION_KEY
 
         fun createAPI(): CustomVisionApiSerivce {
 
@@ -23,7 +23,7 @@ class CustomVisionApi {
                     override fun intercept(chain: Interceptor.Chain): Response {
                         val original : Request = chain.request()
                         val request = original.newBuilder()
-                            .header("Prediction-Key", "b4b90df0975a4b43ac592d431be8e464")
+                            .header("Prediction-Key", API_KEY)
                             .header("Content-Type", "application/json")
                             .method(original.method, original.body)
                             .build()
