@@ -27,7 +27,7 @@ class ResultAdapter(private var trashResults: ArrayList<TrashResult>) : Recycler
 
         fun dataBind(trashResult: TrashResult){
             itemView.tv_home_title.text = trashResult.name
-            itemView.iv_result_logo.setImageBitmap(trashResult.image)
+            //itemView.iv_result_logo.setImageBitmap(trashResult)
         }
     }
 
