@@ -14,7 +14,4 @@ interface CustomVisionApiSerivce {
 
     @POST(BuildConfig.CUSTOMVISION_LINK)
     fun getPredictionFromURL(@Body body: JsonURL) : Call<CustomVisionResult>
-
-    @POST(BuildConfig.CUSTOMVISION_LINK)
-    fun getPredictionFromFILE(@Body body: File) : Call<CustomVisionResult>
 }

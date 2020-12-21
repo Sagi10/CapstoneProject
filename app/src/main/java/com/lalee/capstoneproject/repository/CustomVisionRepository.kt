@@ -46,27 +46,4 @@ class CustomVisionRepository {
         }
     }
 
-    fun getPredictionFromCustomVisionFILE(file: File){
-        try {
-            val result = customVisionRepository.getPredictionFromFILE(file)
-
-            result.enqueue(object: Callback<CustomVisionResult> {
-                override fun onResponse(call: Call<CustomVisionResult>, response: Response<CustomVisionResult>
-                ) {
-                    if (response.isSuccessful){
-                        _customVisionResult.value = response.body()
-                        Log.d(TAG, "DIT IS DE RESULT: ${response.body()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<CustomVisionResult>, t: Throwable) {
-                    Log.e(TAG, "ERROR MET CALL: ${t.message}")
-                }
-
-            })
-
-        } catch (e: Throwable){
-            Log.e(TAG, "ERRORRRRRRRR: ${e.message}")
-        }
-    }
 }

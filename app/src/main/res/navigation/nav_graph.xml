@@ -15,7 +15,7 @@
             app:destination="@id/CameraFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/ResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/CameraFragment"
@@ -27,10 +27,10 @@
             app:destination="@id/HomeFragment" />
         <action
             android:id="@+id/action_CameraFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/ResultFragment" />
     </fragment>
     <fragment
-        android:id="@+id/resultFragment"
+        android:id="@+id/ResultFragment"
         android:name="com.lalee.capstoneproject.ui.ResultFragment"
         android:label="ResultFragment"
         tools:layout="@layout/fragment_result">
