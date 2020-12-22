@@ -1,8 +1,6 @@
 package com.lalee.capstoneproject.ui
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +8,10 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lalee.capstoneproject.R
 import com.lalee.capstoneproject.adapters.ResultAdapter
 import com.lalee.capstoneproject.model.TrashType
-import com.lalee.capstoneproject.viewmodel.CustomVisionViewModel
 import com.lalee.capstoneproject.viewmodel.MyFirebaseViewModel
 import kotlinx.android.synthetic.main.fragment_result.*
 
@@ -41,18 +39,38 @@ class ResultFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observePostsHistoryResult()
-
+        fab_camera_result.setOnClickListener {
+            findNavController().navigate(R.id.action_ResultFragment_to_CameraFragment)
+        }
         rv_posts_history.adapter = resultAdapter
+
+        if (posts.isNullOrEmpty()){
+            tv_result_items.isVisible = true
+            pb_loading_posts.isVisible = false
+            fab_camera_result.isVisible = true
+        }
+
+        observePostsHistoryResult()
     }
 
     private fun observePostsHistoryResult() {
         myFirebaseViewModel.posts.observe(viewLifecycleOwner, {
+            tv_result_items.isVisible = false
+            pb_loading_posts.isVisible = false
+            fab_camera_result.isVisible = true
             this@ResultFragment.posts.clear()
             this@ResultFragment.posts.addAll(it)
-            pb_loading_posts.isVisible = false
             resultAdapter.notifyDataSetChanged()
         })
     }
+
+//    override fun onStop() {
+//
+//        Toast.makeText(activity, "ON STOP CALLED", Toast.LENGTH_SHORT).show()
+//        pb_loading_posts.isVisible = true
+//        fab_camera_result.isVisible = false
+//        tv_result_items.isVisible = false
+//        super.onStop()
+//    }
 
 }

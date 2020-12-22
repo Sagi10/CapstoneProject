@@ -26,7 +26,7 @@
             android:id="@+id/action_CameraFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
         <action
-            android:id="@+id/action_CameraFragment_to_resultFragment"
+            android:id="@+id/action_CameraFragment_to_ResultFragment"
             app:destination="@id/ResultFragment" />
     </fragment>
     <fragment
@@ -35,7 +35,7 @@
         android:label="ResultFragment"
         tools:layout="@layout/fragment_result">
         <action
-            android:id="@+id/action_resultFragment_to_CameraFragment"
+            android:id="@+id/action_ResultFragment_to_CameraFragment"
             app:destination="@id/CameraFragment" />
     </fragment>
 </navigation>

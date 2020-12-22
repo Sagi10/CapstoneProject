@@ -7,5 +7,11 @@
         android:id="@+id/action_history"
         android:orderInCategory="100"
         android:title="@string/history"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_settings_delete"
+        android:orderInCategory="100"
+        android:title="@string/delete_history"
+        app:showAsAction="ifRoom" />
 </menu>
