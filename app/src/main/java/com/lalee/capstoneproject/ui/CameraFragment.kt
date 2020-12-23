@@ -108,6 +108,9 @@ class CameraFragment : Fragment() {
 
             uploadImageToFirebaseStorage(imageUri)
 
+        } else {
+            //if camera app was cancelled navigate back.
+            findNavController().popBackStack()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -118,6 +121,8 @@ class CameraFragment : Fragment() {
 
             customVisionViewModel.getPredictionFromURL(imageUrl)
             customVisionViewModel.customVisionResult.observe(viewLifecycleOwner, { customVisionResult ->
+
+                //TODO clean this code
 
                 // for now only predictions is used. But the other info is also saved.
                 customVisionResult.predictions.let { predictions ->
@@ -136,7 +141,6 @@ class CameraFragment : Fragment() {
                         // if succesvol get the info from firebase and navigate to resultpage.
                         postTrashToFirebase(prediction.tagName, imageUrl.url)
 
-                        pb_loading_posts.isVisible = false
                         findNavController().navigate(R.id.action_CameraFragment_to_ResultFragment)
 
 

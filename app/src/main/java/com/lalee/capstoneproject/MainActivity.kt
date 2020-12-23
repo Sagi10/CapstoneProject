@@ -1,16 +1,25 @@
 package com.lalee.capstoneproject
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.google.firebase.database.FirebaseDatabase
+import com.lalee.capstoneproject.viewmodel.MyFirebaseViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_result.*
 
 class MainActivity : AppCompatActivity() {
 
     private var navController: Int = R.id.nav_host_fragment
+    private val myFirebaseViewModel: MyFirebaseViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +78,38 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_settings_delete -> {
-                Toast.makeText(applicationContext, "HISTORY DELETED", Toast.LENGTH_SHORT).show()
+                //TODO move this in the firebase repo
+                if (!myFirebaseViewModel.posts.value.isNullOrEmpty()) {
+
+                    //TODO change this is material dialog
+                    val builder = AlertDialog.Builder(this)
+                    builder.setMessage("Are you sure you want to DELETE?")
+                        .setCancelable(false)
+                        .setPositiveButton("YES") { _, _ ->
+                            // Delete history
+                            FirebaseDatabase.getInstance().reference.child("posts").removeValue()
+                            myFirebaseViewModel.posts.value?.clear()
+                            findNavController(navController).navigate(R.id.action_ResultFragment_to_HomeFragment)
+                            Toast.makeText(
+                                applicationContext,
+                                "HISTORY DELETED",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .setNegativeButton("NO") { dialog, _ ->
+                            // Dismiss the dialog
+                            dialog.dismiss()
+                        }
+                    val alert = builder.create()
+                    alert.show()
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "THERE ARE NO ITEMS TO BE DELETED",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -77,6 +117,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //removed super function to disable the back button.
+        //only let the user use de back button when the camera fragment is open.
+        findNavController(navController).addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.CameraFragment) {
+                super.onBackPressed()
+            }
+        }
     }
 }

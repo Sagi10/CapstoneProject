@@ -5,5 +5,6 @@ data class TrashType (
     var info: String,
     var tip: String,
     var verwerking: String,
-    var imageUrl: String
+    var imageUrl: String,
+    var herbruikbaar: Boolean
 )

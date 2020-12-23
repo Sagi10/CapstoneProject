@@ -37,12 +37,13 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/example_recycable_plactic"
-            app:layout_constraintStart_toStartOf="@+id/tv_result_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_result_title" />
+            android:layout_width="370dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/example_inleveren"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/iv_result_small_logo"
+            app:layout_constraintTop_toBottomOf="@+id/iv_result_small_logo" />
 
         <ImageView
             android:id="@+id/iv_result_logo"
@@ -51,36 +52,38 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_result_small_logo"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tv_result_extrainfo"
             android:layout_width="380dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/example_extrainfo"
             app:layout_constraintEnd_toEndOf="@+id/iv_result_logo"
             app:layout_constraintStart_toStartOf="@+id/iv_result_logo"
             app:layout_constraintTop_toBottomOf="@+id/iv_result_logo" />
 
-        <Button
-            android:id="@+id/btn_feedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/btn_send_feedback"
-            app:layout_constraintStart_toStartOf="@+id/tv_result_extrainfo"
-            app:layout_constraintTop_toBottomOf="@+id/tv_result_extrainfo" />
+<!--        <Button-->
+<!--            android:id="@+id/btn_feedback"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="@string/btn_send_feedback"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_result_extrainfo"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_result_extrainfo" />-->
 
         <Button
             android:id="@+id/btn_moreinfo"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/btn_more_info"
-            app:layout_constraintEnd_toEndOf="@+id/tv_result_extrainfo"
-            app:layout_constraintTop_toBottomOf="@+id/tv_result_extrainfo" />
+            android:layout_marginEnd="15dp"
+            android:text="@string/btn_tip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_result_title" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

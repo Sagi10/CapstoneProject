@@ -16,11 +16,9 @@ class MyFirebaseViewModel(application: Application) : AndroidViewModel(applicati
 
     private val _posts: LiveData<ArrayList<TrashType>> = myFirebaseRepository.posts
     private val _imageUrl: LiveData<JsonURL> = myFirebaseRepository.imageUrl
-    private val _newPost: LiveData<TrashType> = myFirebaseRepository.newPost
 
     val posts: LiveData<ArrayList<TrashType>> get() = _posts
     val imageUrl: LiveData<JsonURL> get() = _imageUrl
-    val newPost: LiveData<TrashType> get() = _newPost
 
     fun getAllPosts() {
         viewModelScope.launch {

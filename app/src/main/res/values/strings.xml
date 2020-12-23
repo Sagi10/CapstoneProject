@@ -7,10 +7,10 @@
 
     <string name="title_home">Welcome to Trashy</string>
     <string name="description_home">Take a photo to see how to expose the trash you found!</string>
-    <string name="example_extrainfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</string>
-    <string name="btn_more_info">More info</string>
+    <string name="example_extrainfo">Metalen verpakkingen kunnen oneindig en volledig gerecycled worden. Eerst haalt de verwerker etiketten, plastics en folies van het blik af. Daarna wordt het blik geplet en samen met staal omgesmolten. Zo kunnen er weer allerlei nieuwe dingen van gemaakt worden, zoals frisdrankblikjes, fietsen en autovelgen. Ook blik dat bij het restafval belandt en verbrandt, kan grotendeels gerecycled worden omdat het bestand is tegen de hitte van de verbrandingsoven en uit de as gehaald kan worden.</string>
+    <string name="btn_tip">Tip</string>
     <string name="btn_send_feedback">Send feedback</string>
-    <string name="example_recycable_plactic">recycable plactic</string>
+    <string name="example_inleveren">Inleveren bij: bak of zak voor plastic, metalen verpakkingen en drinkpakken</string>
     <string name="example_result_title">Plastic bottle</string>
     <string name="no_items_found">Geen items gevonden. Maak een foto.</string>
     <string name="delete_history">delete History</string>

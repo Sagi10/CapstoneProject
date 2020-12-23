@@ -19,12 +19,13 @@ class MyFirebaseRepository {
 
     private val _posts: MutableLiveData<ArrayList<TrashType>> = MutableLiveData()
     private val _imageUrl: MutableLiveData<JsonURL> = MutableLiveData()
-    private val _newPost: MutableLiveData<TrashType> = MutableLiveData()
-
 
     val posts: LiveData<ArrayList<TrashType>> get() = _posts
     val imageUrl: LiveData<JsonURL> get() = _imageUrl
-    val newPost: LiveData<TrashType> get() = _newPost
+
+    fun deleteAllPosts(){
+        myFirebaseRefPosts.removeValue()
+    }
 
     fun getAllPosts() {
         myFirebaseRefPosts
@@ -40,7 +41,8 @@ class MyFirebaseRepository {
                                     item.child("info").value.toString(),
                                     item.child("tip").value.toString(),
                                     item.child("verwerking").value.toString(),
-                                    item.child("imageUrl").value.toString()
+                                    item.child("imageUrl").value.toString(),
+                                    item.child("herbruikbaar").value.toString().toBoolean()
                                 )
                                 posts.add(post)
                             }
@@ -83,10 +85,16 @@ class MyFirebaseRepository {
                         val imageURI = JsonURL(downloadUri.toString())
 
                         // test image
-                        val testImage =
+                        val testImage1 =
                             JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/IMG_8757.jpg?alt=media&token=a96bdf63-542c-4789-96f8-61381d5f6e22")
 
-                        _imageUrl.value = testImage
+                        val testImage2 =
+                            JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/fles.jpg?alt=media&token=afec9430-f12f-47e1-84e0-7d2e15de0bdc")
+
+                        val testImage3 =
+                            JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/mondkapje.jpg?alt=media&token=dea8339e-fd58-482f-b401-0e108ba458d2")
+
+                        _imageUrl.value = testImage2
                     }
                 } catch (e: Throwable) {
                     //error
@@ -107,10 +115,10 @@ class MyFirebaseRepository {
                                         item.child("info").value.toString(),
                                         item.child("tip").value.toString(),
                                         item.child("verwerking").value.toString(),
-                                        imageURL
+                                        imageURL,
+                                        item.child("herbruikbaar").value.toString().toBoolean()
                                     )
                                     postTrash(trash)
-                                    _newPost.value = trash
                                 }
                             }
                         } catch (e: Throwable) {
