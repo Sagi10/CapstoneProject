@@ -12,7 +12,8 @@
     <string name="btn_send_feedback">Send feedback</string>
     <string name="example_inleveren">Inleveren bij: bak of zak voor plastic, metalen verpakkingen en drinkpakken</string>
     <string name="example_result_title">Plastic bottle</string>
-    <string name="no_items_found">Geen items gevonden. Maak een foto.</string>
+    
+    <string name="no_items_found">No items found. Take a picture!</string>
     <string name="delete_history">delete History</string>
     <string name="take_photo">Take photo</string>
     <string name="history_resuts_title">HISTORY</string>
