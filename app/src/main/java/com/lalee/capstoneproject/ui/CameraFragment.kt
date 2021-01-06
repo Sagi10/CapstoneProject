@@ -51,11 +51,6 @@ class CameraFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     @SuppressLint("QueryPermissionsNeeded")
     private fun dispatchTakePictureIntent() {
 
@@ -73,12 +68,15 @@ class CameraFragment : Fragment() {
             if (photoFile != null) {
                 val photoURI = FileProvider.getUriForFile(
                     requireContext(),
-                    "com.lalee.capstoneproject.fileprovider",
+                    getString(R.string.file_provider),
                     photoFile
                 )
                 pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
             }
+        } else {
+            Toast.makeText(activity, getString(R.string.no_camera_found), Toast.LENGTH_SHORT)
+                .show()
         }
 
     }
@@ -91,7 +89,8 @@ class CameraFragment : Fragment() {
         val image = File.createTempFile(
             "PICTURE_${timeStamp}_",
             ".jpg",
-            storageDir) // directory)
+            storageDir
+        ) // directory)
 
         currentPhotoPath = image.absolutePath
         return image
@@ -120,41 +119,25 @@ class CameraFragment : Fragment() {
         myFirebaseViewModel.imageUrl.observe(viewLifecycleOwner, { imageUrl ->
 
             customVisionViewModel.getPredictionFromURL(imageUrl)
-            customVisionViewModel.customVisionResult.observe(viewLifecycleOwner, { customVisionResult ->
+            customVisionViewModel.customVisionResult.observe(
+                viewLifecycleOwner,
+                { customVisionResult ->
 
-                //TODO clean this code
-
-                // for now only predictions is used. But the other info is also saved.
-                customVisionResult.predictions.let { predictions ->
-
-                    val prediction = CustomVisionPrediction(
-                        // only use the first given response
-                        predictions[0].probability,
-                        predictions[0].tagId,
-                        predictions[0].tagName
-                    )
-
-
-                    Log.i(TAG, "PREDICTION: $prediction")
-
-                    if (prediction.probability > 0.75) {
-                        // if succesvol get the info from firebase and navigate to resultpage.
-                        postTrashToFirebase(prediction.tagName, imageUrl.url)
-
-                        findNavController().navigate(R.id.action_CameraFragment_to_ResultFragment)
-
-
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            "NIKS IS GEVONDEN WAT ER OP LIJKT. MAAK OPNIEUW EEN FOTO",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
-                }
-
-            })
+                    customVisionViewModel.checkPrediction(customVisionResult.predictions[0])
+                    customVisionViewModel.succesfullPrediction.observe(
+                        viewLifecycleOwner,
+                        { isSuccesful ->
+                            if (isSuccesful) {
+                                postTrashToFirebase(
+                                    customVisionResult.predictions[0].tagName,
+                                    imageUrl.url
+                                )
+                                findNavController().navigate(R.id.action_CameraFragment_to_ResultFragment)
+                            } else {
+                                Toast.makeText(activity, getText(R.string.no_prediction), Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                })
         })
     }
 

@@ -1,9 +1,12 @@
 package com.lalee.capstoneproject.viewmodel
 
 import android.app.Application
+import android.content.ContentValues
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lalee.capstoneproject.model.JsonURL
 import com.lalee.capstoneproject.model.TrashType
@@ -26,7 +29,17 @@ class MyFirebaseViewModel(application: Application) : AndroidViewModel(applicati
                 myFirebaseRepository.getAllPosts()
 
             } catch (e: Throwable) {
-                //error
+                Log.e(ContentValues.TAG, e.message.toString())
+            }
+        }
+    }
+
+    fun deleteAllPosts(){
+        viewModelScope.launch {
+            try {
+                myFirebaseRepository.deleteAllPosts()
+            } catch (e: Throwable) {
+                Log.e(ContentValues.TAG, e.message.toString())
             }
         }
     }
@@ -36,7 +49,7 @@ class MyFirebaseViewModel(application: Application) : AndroidViewModel(applicati
             try {
                 myFirebaseRepository.uploadImage(image)
             } catch (e: Throwable) {
-                //error
+                Log.e(ContentValues.TAG, e.message.toString())
             }
         }
     }
@@ -46,7 +59,7 @@ class MyFirebaseViewModel(application: Application) : AndroidViewModel(applicati
             try {
                 myFirebaseRepository.postTrashToFirebase(tagName, imageURL)
             } catch (e: Throwable) {
-                //error
+                Log.e(ContentValues.TAG, e.message.toString())
             }
         }
     }

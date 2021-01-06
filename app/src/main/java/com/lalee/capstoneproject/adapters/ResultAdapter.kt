@@ -43,9 +43,9 @@ class ResultAdapter(
             itemView.tv_result_extrainfo.text = trashType.info
             Glide.with(itemView.context).load(trashType.imageUrl).into(itemView.iv_result_logo)
             if (trashType.herbruikbaar){
-                itemView.iv_result_small_logo.setImageResource(R.drawable.re)
+                itemView.iv_result_small_logo.setImageResource(R.drawable.recycable)
             } else {
-                itemView.iv_result_small_logo.setImageResource(R.drawable.ree)
+                itemView.iv_result_small_logo.setImageResource(R.drawable.not_recycable)
             }
         }
     }

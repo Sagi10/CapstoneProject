@@ -1,6 +1,8 @@
 package com.lalee.capstoneproject.repository
 
+import android.content.ContentValues
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
@@ -50,13 +52,13 @@ class MyFirebaseRepository {
                             _posts.value = posts
 
                         } catch (e: Throwable) {
-                            //error
+                            Log.e(ContentValues.TAG, e.message.toString())
                         }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    //Error
+                    Log.e(ContentValues.TAG, error.message)
                 }
 
             })
@@ -84,20 +86,16 @@ class MyFirebaseRepository {
                         val downloadUri = task.result
                         val imageURI = JsonURL(downloadUri.toString())
 
-                        // test image
-                        val testImage1 =
+                        // test images because i am using the virtual machine.
+                        val testImageBlikjeCola =
                             JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/IMG_8757.jpg?alt=media&token=a96bdf63-542c-4789-96f8-61381d5f6e22")
-
-                        val testImage2 =
+                        val testImagePlasticFles =
                             JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/fles.jpg?alt=media&token=afec9430-f12f-47e1-84e0-7d2e15de0bdc")
 
-                        val testImage3 =
-                            JsonURL("https://firebasestorage.googleapis.com/v0/b/capstone-project-b4812.appspot.com/o/mondkapje.jpg?alt=media&token=dea8339e-fd58-482f-b401-0e108ba458d2")
-
-                        _imageUrl.value = testImage2
+                        _imageUrl.value = testImageBlikjeCola
                     }
                 } catch (e: Throwable) {
-                    //error
+                    Log.e(ContentValues.TAG, e.message.toString())
                 }
             }
     }
@@ -122,13 +120,13 @@ class MyFirebaseRepository {
                                 }
                             }
                         } catch (e: Throwable) {
-                            //error tagname komt niet voor in database
+                            Log.e(ContentValues.TAG, e.message.toString())
                         }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    //error database bestaat niet
+                    Log.e(ContentValues.TAG, error.message)
                 }
             })
     }

@@ -10,7 +10,9 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.FirebaseDatabase
+import com.lalee.capstoneproject.viewmodel.CustomVisionViewModel
 import com.lalee.capstoneproject.viewmodel.MyFirebaseViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_result.*
@@ -19,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private var navController: Int = R.id.nav_host_fragment
     private val myFirebaseViewModel: MyFirebaseViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,38 +79,30 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_settings_delete -> {
-                //TODO move this in the firebase repo
                 if (!myFirebaseViewModel.posts.value.isNullOrEmpty()) {
-
-                    //TODO change this is material dialog
-                    val builder = AlertDialog.Builder(this)
-                    builder.setMessage("Are you sure you want to DELETE?")
-                        .setCancelable(false)
-                        .setPositiveButton("YES") { _, _ ->
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(getString(R.string.conform))
+                        .setNeutralButton(R.string.NO) { dialog, _ ->
+                           dialog.cancel()
+                        }
+                        .setPositiveButton(R.string.YES) { _ , _ ->
                             // Delete history
-                            FirebaseDatabase.getInstance().reference.child("posts").removeValue()
+                            myFirebaseViewModel.deleteAllPosts()
                             myFirebaseViewModel.posts.value?.clear()
                             findNavController(navController).navigate(R.id.action_ResultFragment_to_HomeFragment)
                             Toast.makeText(
                                 applicationContext,
-                                "HISTORY DELETED",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                getString(R.string.history_deleted),
+                                Toast.LENGTH_SHORT).show()
                         }
-                        .setNegativeButton("NO") { dialog, _ ->
-                            // Dismiss the dialog
-                            dialog.dismiss()
-                        }
-                    val alert = builder.create()
-                    alert.show()
+                        .show()
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        "THERE ARE NO ITEMS TO BE DELETED",
+                        getText(R.string.no_items),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
                 true
             }
             else -> super.onOptionsItemSelected(item)

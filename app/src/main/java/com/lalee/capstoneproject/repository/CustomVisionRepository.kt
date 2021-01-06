@@ -31,18 +31,18 @@ class CustomVisionRepository {
                 ) {
                     if (response.isSuccessful){
                         _customVisionResult.value = response.body()
-                        Log.d(TAG, "DIT IS DE RESULT: ${response.body()}")
+                        Log.e(TAG, response.message())
                     }
                 }
 
-                override fun onFailure(call: Call<CustomVisionResult>, t: Throwable) {
-                    Log.e(TAG, "ERROR MET CALL: ${t.message}")
+                override fun onFailure(call: Call<CustomVisionResult>, e: Throwable) {
+                    Log.e(TAG, e.message.toString())
                 }
 
             })
 
         } catch (e: Throwable){
-            Log.e(TAG, "ERRORRRRRRRR: ${e.message}")
+            Log.e(TAG, e.message.toString())
         }
     }
 

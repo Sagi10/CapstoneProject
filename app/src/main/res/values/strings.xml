@@ -16,4 +16,13 @@
     <string name="delete_history">delete History</string>
     <string name="take_photo">Take photo</string>
     <string name="history_resuts_title">HISTORY</string>
+    <string name="history_deleted">HISTORY DELETED</string>
+    <string name="no_items">THERE ARE NO ITEMS TO BE DELETED</string>
+    <string name="conform">Are you sure to want to delete?</string>
+    <string name="NO">NO</string>
+    <string name="YES">YES</string>
+    <string name="no_prediction">NIKS IS GEVONDEN WAT ER OP LIJKT. MAAK OPNIEUW EEN FOTO</string>
+    <string name="no_camera_found">THERE IS NO CAMERA APP ON YOUR PHONE</string>
+
+    <string name="file_provider">com.lalee.capstoneproject.fileprovider</string>
 </resources>

@@ -17,32 +17,26 @@ import kotlinx.coroutines.launch
 class CustomVisionViewModel(application: Application) : AndroidViewModel(application) {
 
     private val customVisionRepository = CustomVisionRepository()
-    private val _predictionName = MutableLiveData<CustomVisionPrediction>()
 
     val customVisionResult = customVisionRepository.customVisionResult
-    val predictionName: LiveData<CustomVisionPrediction> get() = _predictionName
-    val succes: MutableLiveData<Boolean> = MutableLiveData()
+    val succesfullPrediction: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getPredictionFromURL(imageURL: JsonURL) {
         viewModelScope.launch {
             try {
                 customVisionRepository.getPredictionFromCustomVisionURL(imageURL)
             } catch (e: Throwable) {
-                Log.e(TAG, "ERROR met ophalen van prediction: ${e.message}")
+                Log.e(TAG, e.message.toString())
             }
         }
     }
 
-    fun getNameFromPrediction(prediction: List<CustomVisionPrediction>) {
+    fun checkPrediction(prediction: CustomVisionPrediction) {
         viewModelScope.launch {
             try {
-                if (prediction[0].probability > 0.75){
-                    _predictionName.value!!.tagName = prediction[0].tagName
-                   succes.value = true
-                }
-
+                succesfullPrediction.value = prediction.probability > 0.75
             } catch (e: Throwable) {
-
+                Log.e(TAG, e.message.toString())
             }
         }
     }
