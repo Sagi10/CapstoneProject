@@ -22,8 +22,11 @@
     <string name="conform">Are you sure to want to delete?</string>
     <string name="NO">NO</string>
     <string name="YES">YES</string>
+    <string name="ok">OK</string>
+    <string name="tip">Tip</string>
     <string name="no_prediction">NIKS IS GEVONDEN WAT ER OP LIJKT. MAAK OPNIEUW EEN FOTO</string>
     <string name="no_camera_found">THERE IS NO CAMERA APP ON YOUR PHONE</string>
 
     <string name="file_provider">com.lalee.capstoneproject.fileprovider</string>
+    <string name="camera_loading">CAMERA LOADING...</string>
 </resources>

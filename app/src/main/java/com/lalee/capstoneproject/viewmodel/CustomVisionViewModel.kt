@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 
 class CustomVisionViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val MINIMUM_PREDICTION_PERCENTAGE = 0.75
     private val customVisionRepository = CustomVisionRepository()
 
     val customVisionResult = customVisionRepository.customVisionResult
@@ -34,7 +35,7 @@ class CustomVisionViewModel(application: Application) : AndroidViewModel(applica
     fun checkPrediction(prediction: CustomVisionPrediction) {
         viewModelScope.launch {
             try {
-                succesfullPrediction.value = prediction.probability > 0.75
+                succesfullPrediction.value = prediction.probability > MINIMUM_PREDICTION_PERCENTAGE
             } catch (e: Throwable) {
                 Log.e(TAG, e.message.toString())
             }

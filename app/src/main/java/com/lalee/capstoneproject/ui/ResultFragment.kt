@@ -66,9 +66,9 @@ class ResultFragment: Fragment() {
 
     private fun onClickMoreInfo(trashType: TrashType) {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Tip")
+            .setTitle(getString(R.string.tip))
             .setMessage(trashType.tip)
-            .setPositiveButton("OK") { dialog, _ ->
+            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
                 dialog.cancel()
             }
             .show()
