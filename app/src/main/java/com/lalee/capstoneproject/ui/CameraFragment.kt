@@ -123,18 +123,22 @@ class CameraFragment : Fragment() {
                 viewLifecycleOwner,
                 { customVisionResult ->
 
-                    customVisionViewModel.checkPrediction(customVisionResult.predictions[0])
+                    customVisionViewModel.checkPrediction(customVisionResult.predictions.first())
                     customVisionViewModel.succesfullPrediction.observe(
                         viewLifecycleOwner,
                         { isSuccesful ->
                             if (isSuccesful) {
                                 postTrashToFirebase(
-                                    customVisionResult.predictions[0].tagName,
+                                    customVisionResult.predictions.first().tagName,
                                     imageUrl.url
                                 )
                                 findNavController().navigate(R.id.action_CameraFragment_to_ResultFragment)
                             } else {
-                                Toast.makeText(activity, getText(R.string.no_prediction), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    activity,
+                                    getText(R.string.no_prediction),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         })
                 })
